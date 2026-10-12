@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>StopPerroflautas.es — Calculadora de escaños D'Hondt por provincia</title>
+<meta name="description" content="Calcula cuántos puntos faltan para el siguiente escaño en cada una de las 52 circunscripciones. Herramienta informativa basada en los resultados oficiales del 23J 2023 y el sistema D'Hondt.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b0d10">
+<link rel="canonical" href="https://stopperroflautas.es/">
+
+<!-- Favicon: Google exige un favicon en la home, rastreable, con tamaño múltiplo de 48 px -->
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+
+<!-- Open Graph / Twitter (vista previa en WhatsApp, Telegram, X, etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="StopPerroflautas.es">
+<meta property="og:title" content="StopPerroflautas.es — Calcula el siguiente escaño">
+<meta property="og:description" content="Calculadora D'Hondt de las 52 circunscripciones: cuántos puntos faltan para el siguiente escaño.">
+<meta property="og:url" content="https://stopperroflautas.es/">
+<meta property="og:image" content="https://stopperroflautas.es/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Perro con gorro rasta tocando la flauta y el logotipo StopPerroflautas.es">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="StopPerroflautas.es — Calcula el siguiente escaño">
+<meta name="twitter:description" content="Calculadora D'Hondt de las 52 circunscripciones.">
+<meta name="twitter:image" content="https://stopperroflautas.es/og-image.jpg">
+
+<link rel="preload" href="barlow-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"StopPerroflautas.es","url":"https://stopperroflautas.es/","inLanguage":"es-ES","image":"https://stopperroflautas.es/og-image.jpg","description":"Calculadora informativa del sistema D'Hondt por circunscripción."}
+</script>
+</head>
+<body>
+<a class="skip" href="#s-calc">Saltar a la calculadora</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#s-inicio" aria-label="Ir al inicio"><img src="perro-640.webp" width="36" height="36" alt=""><b>StopPerroflautas<i>.es</i></b></a>
+    <nav aria-label="Principal">
+      <a href="#s-porque">Por qué</a><a href="#s-como">Cómo</a><a href="#s-calc">Calculadora</a><a href="#s-sim">Simulador</a><a href="#s-prov">Provincias</a><a href="#s-met">Método</a>
+    </nav>
+  </div>
+</header>
+
+<div id="phase" class="phase" role="status"><div class="wrap" id="phase-txt"></div></div>
+
+<div class="dots" id="dots" aria-hidden="true"></div>
+<div class="counter" id="counter" aria-hidden="true">1 / 8</div>
+
+<main id="main">
+
+<!-- 1 PORTADA -->
+<section class="slide hero" id="s-inicio" data-t="Inicio">
+  <div class="wrap">
+    <div>
+      <img class="wordmark" src="wordmark.webp" width="900" height="59" alt="StopPerroflautas.es">
+      <span class="eyebrow">Elecciones generales · Sistema D'Hondt</span>
+      <h1>Cada escaño <br>se <span style="color:var(--red)">calcula</span>.</h1>
+      <p class="lead">En España no se eligen 350 diputados en una sola urna: se reparten <strong>52 elecciones provinciales</strong>. Aquí ves, provincia a provincia, cuántos puntos faltan para el siguiente escaño.</p>
+      <div class="btns">
+        <a class="btn" href="#s-calc">Calcular mi provincia →</a>
+        <a class="btn ghost" href="#s-como">Cómo funciona</a>
+      </div>
+      <p class="mut" style="margin-top:1.2rem;font-size:.9rem">Herramienta informativa de opinión. Datos oficiales del 23J 2023. Sin cookies, sin rastreo, sin registro.</p>
+    </div>
+    <div class="hero-img"><img src="perro-1024.webp" width="1024" height="1024" alt="Perro con gorro rasta y chándal tocando una flauta dulce" fetchpriority="high"></div>
+  </div>
+</section>
+
+<!-- 2 POR QUÉ -->
+<section class="slide" id="s-porque" data-t="Por qué importa">
+  <div class="wrap">
+    <span class="eyebrow">El dato que casi nadie mira</span>
+    <h2>Detrás de cada escaño hay una división</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Jaén, 23J 2023</h3>
+        <p>5 escaños en juego. Vox obtuvo <b class="num">54.223</b> votos y el 5.º escaño; el siguiente cociente del PP quedó en <b class="num">45.726</b>. Diferencia: <b class="num">8.497</b> votos.</p>
+        <div class="tw"><table><thead><tr><th>Partido</th><th>Votos</th><th>÷1</th><th>÷2</th><th>÷3</th></tr></thead><tbody>
+          <tr class="won"><td>PP</td><td class="num">137.180</td><td class="num">137.180</td><td class="num">68.590</td><td class="num">45.727</td></tr>
+          <tr class="won"><td>PSOE</td><td class="num">133.280</td><td class="num">133.280</td><td class="num">66.640</td><td class="num">44.427</td></tr>
+          <tr class="won"><td>Vox</td><td class="num">54.223</td><td class="num">54.223</td><td class="num">27.112</td><td class="num">18.074</td></tr>
+        </tbody></table></div>
+        <p class="mut" style="margin-top:.8rem;font-size:.85rem">Fuente: Ministerio del Interior, escrutinio 23J 2023. Cálculo propio sobre votos a candidaturas.</p>
+      </div>
+      <div class="card">
+        <h3>La regla</h3>
+        <p>Cada provincia reparte sus escaños con la <b>ley D'Hondt</b>: se dividen los votos de cada candidatura entre 1, 2, 3… y los cocientes más altos se llevan los escaños. Solo compiten las listas que superan el <b>3 %</b> de los votos válidos de la circunscripción.</p>
+        <p>Resultado: en provincias pequeñas hay muchos votos que no se traducen en escaño, y en las grandes unos pocos puntos cambian el reparto.</p>
+        <div class="stat"><div><b>52</b><small>circunscripciones</small></div><div><b>350</b><small>escaños</small></div><div><b>176</b><small>mayoría absoluta</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 CÓMO -->
+<section class="slide" id="s-como" data-t="Cómo funciona">
+  <div class="wrap">
+    <span class="eyebrow">Tres pasos</span>
+    <h2>De tu provincia al siguiente escaño</h2>
+    <div class="grid g3 steps">
+      <div class="card step"><h3>Elige provincia</h3><p>Cada una tiene su número de escaños (Real Decreto 806/2026) y su propio mapa de votos.</p></div>
+      <div class="card step"><h3>Mira la escalera</h3><p>Verás los cocientes D'Hondt en orden y la línea roja: el último escaño que se reparte y el primero que se queda fuera.</p></div>
+      <div class="card step"><h3>Lee la distancia</h3><p>Te decimos cuántos puntos porcentuales faltan para el siguiente escaño, o cuántos sobran antes de perder el actual.</p></div>
+    </div>
+    <p class="mut" style="margin-top:1.4rem">Ni las encuestas ni las previsiones aparecen aquí: partimos de los <b>resultados oficiales</b> y de hipótesis que tú mismo ajustas.</p>
+  </div>
+</section>
+
+<!-- 4 CALCULADORA -->
+<section class="slide" id="s-calc" data-t="Calculadora">
+  <div class="wrap">
+    <span class="eyebrow">Calculadora</span>
+    <h2>Tu provincia, escaño a escaño</h2>
+    <div class="ctrl">
+      <div><label for="prov">Provincia</label><select id="prov"></select></div>
+      <div><label id="l-esc">Escenario</label><div class="seg" role="group" aria-labelledby="l-esc" id="scen"></div></div>
+    </div>
+    <div id="detail" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- 5 SIMULADOR -->
+<section class="slide" id="s-sim" data-t="Simulador">
+  <div class="wrap">
+    <span class="eyebrow">Ejercicio matemático, no predicción</span>
+    <h2>Simulador de hipótesis</h2>
+    <p class="mut">Ajusta el porcentaje de cada partido y observa cómo se reordenan los 350 escaños. Es un ejercicio matemático: no es una encuesta, ni una previsión, ni un sondeo.</p>
+    <div class="grid g2">
+      <div class="card">
+        <div class="seg" id="simpre" role="group" aria-label="Hipótesis predefinidas" style="margin-bottom:1rem"></div>
+        <div id="sliders"></div>
+        <p class="mut" style="font-size:.85rem;margin:.8rem 0 0">Base: 23J 2023 (% nacional sobre votos válidos). Cada partido se escala proporcionalmente en cada provincia.</p>
+      </div>
+      <div class="card"><h3>Reparto resultante</h3><div id="simout"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 PROVINCIAS -->
+<section class="slide" id="s-prov" data-t="Provincias">
+  <div class="wrap">
+    <span class="eyebrow">Mapa provincial</span>
+    <h2>52 provincias de un vistazo</h2>
+    <div class="ctrl"><div class="seg" id="pfilter" role="group" aria-label="Filtrar provincias"></div></div>
+    <div class="legend" style="margin-bottom:.8rem"><span>🟢 escaño seguro</span><span>🟠 en riesgo / alcanzable</span><span>🔴 muy cerca</span><span>⚪ lejos o sin dato</span></div>
+    <div class="pgrid" id="pgrid"></div>
+  </div>
+</section>
+
+<!-- 7 MÉTODO -->
+<section class="slide" id="s-met" data-t="Método y límites">
+  <div class="wrap">
+    <span class="eyebrow">Transparencia</span>
+    <h2>Cómo se calcula y qué no dice</h2>
+    <div class="grid g2">
+      <div class="card"><h3>Método</h3>
+        <ul><li>Resultados 23J 2023 por provincia, % sobre votos válidos (incluidos en blanco).</li>
+        <li>Reparto D'Hondt con barrera del 3 % por circunscripción.</li>
+        <li>Escaños por provincia según el RD 806/2026; los resultados de 2023 se recalculan con los escaños de 2023 y el motor reproduce las 52 provincias.</li>
+        <li>Hipótesis: porcentaje nacional escalado proporcionalmente en cada provincia.</li>
+        <li>Código abierto y verificable en el repositorio público.</li></ul></div>
+      <div class="card"><h3>Límites</h3>
+        <ul><li>Un voto concreto no decide nada por sí solo; el cálculo es una distancia, no una garantía.</li>
+        <li>La participación, los partidos regionales y los cambios de voto reales alteran el resultado.</li>
+        <li>Las provincias sin dato de Vox (p. ej. Santa Cruz de Tenerife) se muestran como «sin dato».</li>
+        <li>No es asesoramiento electoral ni una encuesta (art. 69 LOREG).</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 CALENDARIO / CIERRE -->
+<section class="slide" id="s-fin" data-t="Información legal">
+  <div class="wrap">
+    <span class="eyebrow">Antes de nada</span>
+    <h2>Esto es una web de opinión e información</h2>
+    <div class="grid g3">
+      <div class="card"><h3>Sin dinero ni partido</h3><p>Sitio personal sin publicidad, sin patrocinio y sin ánimo de lucro. No lo financia ni lo encarga ningún partido. Más en el <a href="aviso-legal.html">aviso legal</a>.</p></div>
+      <div class="card"><h3>Sin rastreo</h3><p>No usamos cookies ni analítica. Detalles en <a href="privacidad.html">privacidad</a> y <a href="cookies.html">cookies</a>.</p></div>
+      <div class="card"><h3>Calendario electoral</h3><p>La ley prohíbe publicar sondeos en los 5 días previos al voto y hacer propaganda el día de reflexión y el de la votación. La web se adapta sola esos días (oculta el simulador y muestra un aviso): no hay que tocar nada.</p></div>
+    </div>
+    <div class="btns cta"><button class="btn" id="share" type="button">Compartir esta web</button><a class="btn ghost" href="#s-calc">Volver a la calculadora</a></div>
+    <p id="share-msg" class="mut" role="status" style="margin-top:.8rem"></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav aria-label="Legal"><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Política de privacidad</a><a href="cookies.html">Política de cookies</a></nav>
+    <small>© <span id="yr">2026</span> StopPerroflautas.es · Sitio personal, informativo y sin ánimo de lucro · <a href="https://github.com/ayudanteanonimo/stopperroflautas">Código fuente y contacto</a>. Datos electorales: Ministerio del Interior. Tipografías: Barlow Condensed e IBM Plex (SIL OFL 1.1). Esta web no es una encuesta ni el sitio oficial de ningún partido.</small>
+  </div>
+</footer>
+
+<script src="core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
